@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Formulario Clubs</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" ></script>
+    </h:head>
+    <h:body>
+        <h:form id="frmInicial">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        Proyecto WAD
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <h:commandLink action="/index?faces-redirect=true"
+                                               class="nav-link">
+                                    Home
+                                </h:commandLink>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink action="/profesor/listadoProfesores?faces-redirect=true"
+                                               class="nav-link">
+                                    Listado de Profesores
+                                </h:commandLink>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink action="/materia/listadoMaterias?faces-redirect=true"
+                                               class="nav-link">
+                                    Listado de Materias
+                                </h:commandLink>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink action="/clase/listadoClases?faces-redirect=true"
+                                               class="nav-link">
+                                    Listado de Clases
+                                </h:commandLink>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink action="/asesoria/listadoAsesorias?faces-redirect=true"
+                                               class="nav-link">
+                                    Listado de Asesorias
+                                </h:commandLink>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink action="/club/listadoClubs?faces-redirect=true"
+                                               class="nav-link">
+                                    Listado de Clubs
+                                </h:commandLink>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </h:form>
+        
+        <div class="container">
+            <div class="card border-primary mb-3">
+                <div class="card-header">
+                    <h2 class="text-center text-primary">
+                        Listado de Clubs
+                    </h2>
+                </div>
+                <div class="card-body text-primary table-responsive">
+                    <f:view>
+                        <h:form id="frmClubForm">
+                            <h:inputHidden id="accion" value="#{clubMB.accion}"/>
+                            <h:panelGrid columns="3">
+                                
+                                <h:outputText value="Nombre: "/>
+                                <h:inputText id="txtNombreClub" value="#{clubMB.dto.nombreClub}" class="form-control"/>
+                                <h:message for="txtNombreClub"/>
+                                
+                                <h:outputText value="Descripcion: "/>
+                                <h:inputText id="txtDescripcionClub" value="#{clubMB.dto.descripcionClub}" class="form-control"/>
+                                <h:message for="txtDescripcionClub"/>
+                                
+                                <h:outputText value="Horario: "/>
+                                <h:inputText id="txtHorarioClub" value="#{clubMB.dto.horarioClub}" class="form-control"/>
+                                <h:message for="txtHorarioClub"/>
+
+                                <h:outputText value="Profesor: "/>
+                                <h:selectOneMenu id="cboProfesor" value="#{clubMB.dto.idProf}" class="form-control">
+                                    <f:selectItems value="#{clubMB.listaProfesor}" var="prof"
+                                                   itemLabel="#{prof.nombreProfesor}"
+                                                   itemValue="#{prof.idProfesor}"/>
+                                </h:selectOneMenu>
+                                <h:message for="cboProfesor"/>
+                                
+                                <h:commandButton action="#{clubMB.add()}"
+                                                 value="Guardar Club"
+                                                 class="btn btn-outline-success"
+                                                 rendered="#{clubMB.modoCrear}"/>
+                                
+                                <h:commandButton action="#{clubMB.update()}"
+                                                 value="Actualizar Club"
+                                                 class="btn btn-outline-info"
+                                                 rendered="#{clubMB.modoActualizar}"/>
+                                
+                            </h:panelGrid>
+                        </h:form>
+                    </f:view>
+                </div>
+            </div>
+        </div>
+        
+    </h:body>
+</html>
+
+
